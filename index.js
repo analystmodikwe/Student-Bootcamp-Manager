@@ -190,3 +190,7 @@ registerStudent("Zanele", "Cyber Security", 50, 55, 60, 52, 58); // 5 marks (res
 registerStudent("Lungile");                                 // no marks
 registerStudent("Ghost", "UX Design", 50, "abc", 150);      // invalid marks ignored
 registerStudent(123);      
+
+// Functions as values / higher-order
+console.log("\nAll students (short format):");
+printStudents(students, formatters.short);
