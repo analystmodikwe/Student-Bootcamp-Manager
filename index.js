@@ -174,3 +174,14 @@ function printReport() {
   console.log(`Passed:             ${passed}`);
   console.log(`Failed:             ${failed}`);
 }
+
+// RUN THE APPLICATION
+
+console.log(`${Config.getName()} v${Config.getVersion()} - pass mark: ${Config.getPassingMark()}`);
+
+// Normal cases
+registerStudent("Thandi", "Web Development", 75, 82, 90);   // multiple marks, pass
+registerStudent("Sipho", "Data Analytics", 40, 35, 45);     // fail
+registerStudent("Naledi", undefined, 65, 70);               // default course
+registerStudent("Kabelo", "Web Development", 88);           // only one mark
+registerStudent("Zanele", "Cyber Security", 50, 55, 60, 52, 58); // 5 marks (rest params)
