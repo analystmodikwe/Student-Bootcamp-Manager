@@ -4,10 +4,10 @@
 // Only the methods in the returned object can touch them.
 const Config = (function () {
   const bootcampName = "Lesedi's Academy"; // private
-  const version = "1.0.0";                            // private
-  let passingMark = 50;      
+  const version = "1.0.0"; // private
+  let passingMark = 50;
 
-   return {
+  return {
     getName: () => bootcampName,
     getVersion: () => version,
     getPassingMark: () => passingMark,
@@ -61,10 +61,12 @@ function registerStudent(name, course = "General Programming", ...marks) {
 
   // Edge case: keep only valid marks (numbers from 0 to 100)
   const validMarks = marks.filter(
-    (m) => typeof m === "number" && !Number.isNaN(m) && m >= 0 && m <= 100
+    (m) => typeof m === "number" && !Number.isNaN(m) && m >= 0 && m <= 100,
   );
   if (validMarks.length !== marks.length) {
-    console.warn(`${name}: ${marks.length - validMarks.length} invalid mark(s) ignored`);
+    console.warn(
+      `${name}: ${marks.length - validMarks.length} invalid mark(s) ignored`,
+    );
   }
 
   const student = {
@@ -116,7 +118,9 @@ const filterStudents = (list, predicate) => list.filter(predicate);
 const reportPrinter = {
   title: "STUDENT BOOTCAMP REPORT",
   printHeader() {
-    console.log(`\n===== ${this.title} (${Config.getName()} v${Config.getVersion()}) =====`);
+    console.log(
+      `\n===== ${this.title} (${Config.getName()} v${Config.getVersion()}) =====`,
+    );
   },
 };
 
@@ -140,11 +144,12 @@ function processStudent(studentId, callback) {
 
   console.log(`Processing ${student.name}...`); // 1. start
 
-  setTimeout(() => {                              // 2. wait (simulated delay)
+  setTimeout(() => {
+    // 2. wait (simulated delay)
     student.average = calculateAverage(student.marks); // 3. complete
     student.status = getStatus(student.average);
     processedCounter.increment();
-    callback(null, student);                      // 4. callback decides what's next
+    callback(null, student); // 4. callback decides what's next
   }, 1000);
 }
 
@@ -154,15 +159,27 @@ function printReport() {
   const header = reportPrinter.printHeader.bind(reportPrinter);
   header();
 
-  console.log("ID".padEnd(9) + "Name".padEnd(10) + "Course".padEnd(22) +
-              "Marks".padEnd(18) + "Avg".padEnd(8) + "Status");
+  console.log(
+    "ID".padEnd(9) +
+      "Name".padEnd(10) +
+      "Course".padEnd(22) +
+      "Marks".padEnd(18) +
+      "Avg".padEnd(8) +
+      "Status",
+  );
   console.log("-".repeat(75));
 
   students.forEach((s) => {
     const marksText = s.marks.length ? s.marks.join(", ") : "none";
     const avgText = s.average === null ? "N/A" : s.average.toFixed(1);
-    console.log(s.id.padEnd(9) + s.name.padEnd(10) + s.course.padEnd(22) +
-                marksText.padEnd(18) + avgText.padEnd(8) + s.status);
+    console.log(
+      s.id.padEnd(9) +
+        s.name.padEnd(10) +
+        s.course.padEnd(22) +
+        marksText.padEnd(18) +
+        avgText.padEnd(8) +
+        s.status,
+    );
   });
 
   const passed = filterStudents(students, (s) => s.status === "PASS").length;
@@ -177,27 +194,29 @@ function printReport() {
 
 // RUN THE APPLICATION
 
-console.log(`${Config.getName()} v${Config.getVersion()} - pass mark: ${Config.getPassingMark()}`);
+console.log(
+  `${Config.getName()} v${Config.getVersion()} - pass mark: ${Config.getPassingMark()}`,
+);
 
 // Normal cases
-registerStudent("Thandi", "Web Development", 75, 82, 90);   // multiple marks, pass
-registerStudent("Sipho", "Data Analytics", 40, 35, 45);     // fail
-registerStudent("Naledi", undefined, 65, 70);               // default course
-registerStudent("Kabelo", "Web Development", 88);           // only one mark
+registerStudent("Thandi", "Web Development", 75, 82, 90); // multiple marks, pass
+registerStudent("Sipho", "Data Analytics", 40, 35, 45); // fail
+registerStudent("Naledi", undefined, 65, 70); // default course
+registerStudent("Kabelo", "Web Development", 88); // only one mark
 registerStudent("Zanele", "Cyber Security", 50, 55, 60, 52, 58); // 5 marks (rest params)
 
 // Edge cases
-registerStudent("Lungile");                                 // no marks
-registerStudent("Ghost", "UX Design", 50, "abc", 150);      // invalid marks ignored
-registerStudent(123);      
+registerStudent("Lungile"); // no marks
+registerStudent("Ghost", "UX Design", 50, "abc", 150); // invalid marks ignored
+registerStudent(123);
 
 // Functions as values / higher-order
 console.log("\nAll students (short format):");
 printStudents(students, formatters.short);
 
 // call vs apply vs bind: all control what "this" is
-console.log(studentSummary.call(students[0], "Hello", "!"));     // args one by one
-console.log(studentSummary.apply(students[1], ["Hi", "."]));     // args in an ARRAY
+console.log(studentSummary.call(students[0], "Hello", "!")); // args one by one
+console.log(studentSummary.apply(students[1], ["Hi", "."])); // args in an ARRAY
 const welcomeNaledi = studentSummary.bind(students[2], "Welcome", "!"); // runs LATER
 console.log(welcomeNaledi());
 
@@ -222,4 +241,6 @@ students.forEach((s) => processStudent(s.id, onStudentProcessed));
 processStudent("STU-999", (err) => console.error(`Test: ${err.message}`));
 
 // This line runs BEFORE any student finishes, because setTimeout doesn't block
-console.log("All processing requests sent. JavaScript keeps running while it waits...");
+console.log(
+  "All processing requests sent. JavaScript keeps running while it waits...",
+);
