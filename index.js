@@ -204,3 +204,14 @@ console.log(welcomeNaledi());
 // Async demo
 console.log("\n--- Starting processing ---");
 let pending = students.length;
+
+// This callback runs once per student, after its delay
+function onStudentProcessed(err, student) {
+  if (err) {
+    console.error(`Error: ${err.message}`);
+  } else {
+    console.log(`Done: ${student.name} -> ${student.status}`);
+  }
+  pending--;
+  if (pending === 0) printReport(); // last one finished, so show the report
+}
