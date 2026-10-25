@@ -21,3 +21,16 @@ const Config = (function () {
     },
   };
 })();
+
+// ---------- DAY 2 / Task 10: Generator (unique IDs) ----------
+// function* makes a generator; it pauses at every yield and
+// resumes when .next() is called, remembering its place (n).
+function* idGenerator(prefix = "STU", start = 1) {
+  let n = start;
+  while (true) {
+    yield `${prefix}-${String(n).padStart(3, "0")}`; // STU-001, STU-002...
+    n++;
+  }
+}
+const ids = idGenerator();
+
