@@ -167,3 +167,10 @@ function printReport() {
 
   const passed = filterStudents(students, (s) => s.status === "PASS").length;
   const failed = filterStudents(students, (s) => s.status === "FAIL").length;
+
+  console.log("-".repeat(75));
+  console.log(`Total students:     ${students.length}`);
+  console.log(`Students processed: ${processedCounter.getCount()}`);
+  console.log(`Passed:             ${passed}`);
+  console.log(`Failed:             ${failed}`);
+}
