@@ -215,3 +215,11 @@ function onStudentProcessed(err, student) {
   pending--;
   if (pending === 0) printReport(); // last one finished, so show the report
 }
+
+students.forEach((s) => processStudent(s.id, onStudentProcessed));
+
+// Edge case: student does not exist (callback fires right away with an error)
+processStudent("STU-999", (err) => console.error(`Test: ${err.message}`));
+
+// This line runs BEFORE any student finishes, because setTimeout doesn't block
+console.log("All processing requests sent. JavaScript keeps running while it waits...");
