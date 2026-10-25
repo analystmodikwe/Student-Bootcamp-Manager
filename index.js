@@ -107,3 +107,20 @@ const formatters = {
 function printStudents(list, formatter) {
   list.forEach((s) => console.log(formatter(s)));
 }
+
+// Another higher-order function: filter using any condition passed in
+const filterStudents = (list, predicate) => list.filter(predicate);
+
+// ---------- DAY 2 / Tasks 6-9: this, call, apply, bind ----------
+// Task 6: "this" inside a method refers to the object the method is called on
+const reportPrinter = {
+  title: "STUDENT BOOTCAMP REPORT",
+  printHeader() {
+    console.log(`\n===== ${this.title} (${Config.getName()} v${Config.getVersion()}) =====`);
+  },
+};
+
+// A standalone function that relies on "this"
+function studentSummary(greeting, punctuation) {
+  return `${greeting} ${this.name} - ${this.course}${punctuation}`;
+}
