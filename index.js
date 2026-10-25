@@ -83,3 +83,9 @@ function registerStudent(name, course = "General Programming", ...marks) {
 function addMarks(student, ...newMarks) {
   student.marks = [...student.marks, ...newMarks];
 }
+
+// Reusable average calculator. Returns null if there are no marks.
+function calculateAverage(marks) {
+  if (!Array.isArray(marks) || marks.length === 0) return null;
+  return marks.reduce((sum, m) => sum + m, 0) / marks.length;
+}
