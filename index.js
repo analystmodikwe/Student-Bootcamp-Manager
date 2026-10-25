@@ -147,3 +147,20 @@ function processStudent(studentId, callback) {
     callback(null, student);                      // 4. callback decides what's next
   }, 1000);
 }
+
+// ---------- DAY 3: Final report ----------
+function printReport() {
+  // bind: permanently attaches "this" so the method works when called alone
+  const header = reportPrinter.printHeader.bind(reportPrinter);
+  header();
+
+  console.log("ID".padEnd(9) + "Name".padEnd(10) + "Course".padEnd(22) +
+              "Marks".padEnd(18) + "Avg".padEnd(8) + "Status");
+  console.log("-".repeat(75));
+
+  students.forEach((s) => {
+    const marksText = s.marks.length ? s.marks.join(", ") : "none";
+    const avgText = s.average === null ? "N/A" : s.average.toFixed(1);
+    console.log(s.id.padEnd(9) + s.name.padEnd(10) + s.course.padEnd(22) +
+                marksText.padEnd(18) + avgText.padEnd(8) + s.status);
+  });
