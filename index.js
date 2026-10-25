@@ -139,3 +139,11 @@ function processStudent(studentId, callback) {
   }
 
   console.log(`Processing ${student.name}...`); // 1. start
+
+  setTimeout(() => {                              // 2. wait (simulated delay)
+    student.average = calculateAverage(student.marks); // 3. complete
+    student.status = getStatus(student.average);
+    processedCounter.increment();
+    callback(null, student);                      // 4. callback decides what's next
+  }, 1000);
+}
