@@ -200,3 +200,7 @@ console.log(studentSummary.call(students[0], "Hello", "!"));     // args one by 
 console.log(studentSummary.apply(students[1], ["Hi", "."]));     // args in an ARRAY
 const welcomeNaledi = studentSummary.bind(students[2], "Welcome", "!"); // runs LATER
 console.log(welcomeNaledi());
+
+// Async demo
+console.log("\n--- Starting processing ---");
+let pending = students.length;
