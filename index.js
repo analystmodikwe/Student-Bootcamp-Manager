@@ -124,3 +124,18 @@ const reportPrinter = {
 function studentSummary(greeting, punctuation) {
   return `${greeting} ${this.name} - ${this.course}${punctuation}`;
 }
+
+// ---------- DAY 3: Asynchronous processing + callbacks ----------
+// callback follows the (error, result) convention
+function processStudent(studentId, callback) {
+  if (typeof callback !== "function") {
+    console.error("processStudent needs a callback function");
+    return;
+  }
+  const student = students.find((s) => s.id === studentId);
+  if (!student) {
+    callback(new Error(`Student ${studentId} does not exist`)); // edge case
+    return;
+  }
+
+  console.log(`Processing ${student.name}...`); // 1. start
