@@ -185,3 +185,8 @@ registerStudent("Sipho", "Data Analytics", 40, 35, 45);     // fail
 registerStudent("Naledi", undefined, 65, 70);               // default course
 registerStudent("Kabelo", "Web Development", 88);           // only one mark
 registerStudent("Zanele", "Cyber Security", 50, 55, 60, 52, 58); // 5 marks (rest params)
+
+// Edge cases
+registerStudent("Lungile");                                 // no marks
+registerStudent("Ghost", "UX Design", 50, "abc", 150);      // invalid marks ignored
+registerStudent(123);      
