@@ -164,3 +164,6 @@ function printReport() {
     console.log(s.id.padEnd(9) + s.name.padEnd(10) + s.course.padEnd(22) +
                 marksText.padEnd(18) + avgText.padEnd(8) + s.status);
   });
+
+  const passed = filterStudents(students, (s) => s.status === "PASS").length;
+  const failed = filterStudents(students, (s) => s.status === "FAIL").length;
