@@ -34,3 +34,14 @@ function* idGenerator(prefix = "STU", start = 1) {
 }
 const ids = idGenerator();
 
+// ---------- DAY 2 / Task 1: Closure (processing counter) ----------
+// "count" is not accessible from outside, but the returned
+// functions still remember it after createCounter() has finished.
+function createCounter() {
+  let count = 0;
+  return {
+    increment: () => ++count,
+    getCount: () => count,
+  };
+}
+const processedCounter = createCounter();
