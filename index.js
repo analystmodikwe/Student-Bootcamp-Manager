@@ -3,7 +3,7 @@
 // The function runs immediately, and its variables stay private.
 // Only the methods in the returned object can touch them.
 const Config = (function () {
-  const bootcampName = "Melsoft Full Stack Bootcamp"; // private
+  const bootcampName = "Lesedi's Academy"; // private
   const version = "1.0.0";                            // private
   let passingMark = 50;      
 
