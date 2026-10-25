@@ -95,3 +95,15 @@ function getStatus(average, passMark = Config.getPassingMark()) {
   if (average === null) return "N/A"; // no marks, so we can't judge
   return average >= passMark ? "PASS" : "FAIL";
 }
+
+// ---------- DAY 2 / Tasks 3 & 4: Functions as values + higher-order ----------
+// Functions stored as values inside an object
+const formatters = {
+  short: (s) => `${s.id} - ${s.name}`,
+  long: (s) => `${s.id} | ${s.name} | ${s.course} | ${s.status}`,
+};
+
+// Higher-order function: it ACCEPTS a function (formatter) and uses it
+function printStudents(list, formatter) {
+  list.forEach((s) => console.log(formatter(s)));
+}
