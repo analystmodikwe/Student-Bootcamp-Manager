@@ -45,3 +45,36 @@ function createCounter() {
   };
 }
 const processedCounter = createCounter();
+
+// ---------- DAY 1: Student storage ----------
+const students = []; // array of student objects
+
+// Default parameter: course. Rest parameter: ...marks (any number of marks).
+// NOTE: to trigger the default course while still passing marks,
+// pass undefined: registerStudent("Thabo", undefined, 70, 80)
+function registerStudent(name, course = "General Programming", ...marks) {
+  // Edge case: wrong data type / empty name
+  if (typeof name !== "string" || name.trim() === "") {
+    console.error(`Registration failed: invalid name (${name})`);
+    return null; // we return before using the generator, so no ID is wasted
+  }
+
+  // Edge case: keep only valid marks (numbers from 0 to 100)
+  const validMarks = marks.filter(
+    (m) => typeof m === "number" && !Number.isNaN(m) && m >= 0 && m <= 100
+  );
+  if (validMarks.length !== marks.length) {
+    console.warn(`${name}: ${marks.length - validMarks.length} invalid mark(s) ignored`);
+  }
+
+  const student = {
+    id: ids.next().value, // .next() asks the generator for the next ID
+    name: name.trim(),
+    course,
+    marks: validMarks,
+    average: null,
+    status: "PENDING",
+  };
+  students.push(student);
+  return student;
+}
