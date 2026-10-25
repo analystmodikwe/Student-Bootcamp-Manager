@@ -78,3 +78,8 @@ function registerStudent(name, course = "General Programming", ...marks) {
   students.push(student);
   return student;
 }
+
+// Spread syntax: build a NEW marks array instead of mutating the old one
+function addMarks(student, ...newMarks) {
+  student.marks = [...student.marks, ...newMarks];
+}
