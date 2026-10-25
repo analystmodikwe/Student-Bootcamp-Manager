@@ -194,3 +194,9 @@ registerStudent(123);
 // Functions as values / higher-order
 console.log("\nAll students (short format):");
 printStudents(students, formatters.short);
+
+// call vs apply vs bind: all control what "this" is
+console.log(studentSummary.call(students[0], "Hello", "!"));     // args one by one
+console.log(studentSummary.apply(students[1], ["Hi", "."]));     // args in an ARRAY
+const welcomeNaledi = studentSummary.bind(students[2], "Welcome", "!"); // runs LATER
+console.log(welcomeNaledi());
