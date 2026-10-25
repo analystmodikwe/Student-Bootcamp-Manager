@@ -89,3 +89,9 @@ function calculateAverage(marks) {
   if (!Array.isArray(marks) || marks.length === 0) return null;
   return marks.reduce((sum, m) => sum + m, 0) / marks.length;
 }
+
+// Default parameter again: passMark falls back to the configured value
+function getStatus(average, passMark = Config.getPassingMark()) {
+  if (average === null) return "N/A"; // no marks, so we can't judge
+  return average >= passMark ? "PASS" : "FAIL";
+}
